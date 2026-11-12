@@ -1,176 +1,176 @@
-# Deploy `json-server` to `{{ free hosting site }}`
+# 🚀 Fake API (`json-server`) — Studio Alexia Menezes
 
-> Instructions how to deploy the full fake REST API [json-server](https://github.com/typicode/json-server) to various free hosting sites. Should only be used in development purpose but can act as a simpler database for smaller applications.
+> 📌 **Nota do Projeto:** Este repositório serve como a **Fake API (REST API Mock)** da aplicação web do **Studio Alexia Menezes**, desenvolvida como Projeto de Extensão em Ciência da Computação. O modelo foi estruturado de forma genérica e reutilizável para que possa ser aproveitado como base em outros projetos.
 
-* [**Create your database**](#create-your-database)
-* [Deploy to **Heroku**](#deploy-to-heroku)
-* [Deploy to **Glitch**](#deploy-to-glitch)
-* [Deploy to **Azure**](#deploy-to-azure)
+---
 
-## Create your database
+## 🎯 Sobre o Projeto
 
-1. Press the green `Use this template`-button in the right corner
-2. Give your new repo a name and press the green `Create repository from template`-button
-3. Clone your newly created repository to your computer
+Esta API fornece dados mockados via `json-server` para a aplicação web do **Studio Alexia Menezes**, cobrindo o gerenciamento e exibição de dados para:
+- Serviços (sobrancelhas, cílios, unhas e estética facial)
+- Agendamentos de clientes
+- Horários de atendimento e informações do estúdio
 
-4 . Change the contents of `db.json` to **your own content** according to the [`json-server example`](https://github.com/typicode/json-server#example) and then `commit` your changes to git locally.
+---
 
-_this example will create `/posts` route , each resource will have `id`, `title` and `content`. `id` will auto increment!_
+## 📋 Sumário
+
+- [Como configurar seu banco de dados](#-criando-seu-banco-de-dados-dbjson)
+- [Executando localmente](#-executando-localmente)
+- [Deploy no **Render**](#-deploy-no-render)
+- [Deploy no **Azure**](#-deploy-no-azure)
+
+---
+
+## 🗄️ Criando seu banco de dados (`db.json`)
+
+1. Clone este repositório para o seu computador:
+
+```bash
+git clone https://github.com/seu-usuario/json-server-studio-alexa.git 
+cd json-server-studio-alexa
+
+```
+
+2. Edite o arquivo `db.json` com o seu conteúdo de acordo com a documentação do [`json-server`](https://github.com/typicode/json-server#example).
+
+*Exemplo de estrutura no `db.json`:*
+
 ```json
 {
-  "posts":[
+  "servicos": [
     {
-      "id" : 0,
-      "title": "First post!",
-      "content" : "My first content!"
+      "id": 1,
+      "nome": "Design de Sobrancelhas",
+      "categoria": "sobrancelhas",
+      "preco": 50.0
     }
-  ]
+  ],
+  "agendamentos": []
 }
+
 ```
+
+3. Salve o arquivo e faça o `commit` das suas alterações no Git.
 
 ---
 
-## Deploy to **Heroku**
+## 💻 Executando Localmente
 
-<img align="right" width="100px" height="auto" src="https://cdn.worldvectorlogo.com/logos/heroku.svg" alt="Heroku">
+1. Instale as dependências:
+```bash
+npm install
+# ou
+yarn install
+```
 
-Heroku is a free hosting service for hosting small projects. Easy setup and deploy from the command line via _git_.
 
-###### Pros
+2. Inicie o servidor:
+```bash
+npm start
+# ou
+yarn start
+```
 
-* Easy setup
-* Free
 
-###### Cons
 
-* App has to sleep a couple of hours every day.
-* "Powers down" after 30 mins of inactivity. Starts back up when you visit the site but it takes a few extra seconds. Can maybe be solved with [**Kaffeine**](http://kaffeine.herokuapp.com/)
+O servidor estará disponível por padrão em `http://localhost:3000` (ou na porta definida pela variável de ambiente `PORT`).
 
 ---
 
-### Install Heroku
+## 🌐 Deploy no **Render**
 
-1 . [Create your database](#create-your-database)
+O **[Render](https://render.com/)** é uma plataforma simples e gratuita para hospedagem de aplicações Node.js e APIs REST.
 
-2 . Create an account on <br/>[https://heroku.com](https://heroku.com)
+### Passo a Passo
 
-3 . Install the Heroku CLI on your computer: <br/>[https://devcenter.heroku.com/articles/heroku-cli](https://devcenter.heroku.com/articles/heroku-cli)
+1. Crie uma conta gratuita no [Render](https://render.com/).
+2. No Dashboard do Render, clique no botão **New +** e selecione **Web Service**.
+3. Conecte sua conta do GitHub e selecione o repositório deste projeto.
+4. Preencha as configurações do serviço:
+* **Name:** `json-server` (ou o nome de sua preferência)
+* **Region:** Selecione a região mais próxima (ex: Oregon ou Ohio)
+* **Branch:** `main` ou `master`
+* **Runtime:** `Node`
+* **Build Command:** `npm install` (ou `yarn`)
+* **Start Command:** `node server.js` (ou `npm start`)
+* **Instance Type:** `Free`
 
-4 . Connect the Heroku CLI to your account by writing the following command in your terminal and follow the instructions on the command line:
-```bash
-heroku login
-```
 
-5 . Then create a remote heroku project, kinda like creating a git repository on GitHub. This will create a project on Heroku with a random name. If you want to name your app you have to supply your own name like `heroku create project-name`:
-```bash
-heroku create my-cool-project
-```
+5. Clique em **Create Web Service**.
 
-6 . Push your app to __Heroku__ (you will see a wall of code)
-```bash
-git push heroku master
-```
+### 🔗 Configuração de Auto-Deploy via Webhook no GitHub
+Para que o Render faça a implantação automaticamente sempre que você fizer um git push para o GitHub:
 
-7 . Visit your newly create app by opening it via heroku:
-```bash
-heroku open
-```
+1. No painel do Render, vá nas configurações do seu serviço (Settings).
 
-8 . For debugging if something went wrong:
-```bash
-heroku logs --tail
-```
+2. Na seção Deploy Hook, copie a URL gerada (ex: https://api.render.com/deploy/srv-...).
+
+3. Acesse o repositório do seu projeto no GitHub.
+
+4. Vá em Settings > Webhooks e clique em Add webhook.
+
+5. Preencha os campos com as seguintes opções:
+
+6. Payload URL: Cole a URL do Deploy Hook copiada do Render.
+
+7. Content type: Altere para application/json.
+
+8. Which events would you like to trigger this webhook?: Mantenha selecionado Just the push event.
+
+9. Clique em Add webhook.
 
 ---
 
-#### How it works
+## ☁️ Deploy no **Azure**
 
-Heroku will look for a startup-script, this is by default `npm start` so make sure you have that in your `package.json` (assuming your script is called `server.js`):
-```json
- "scripts": {
-    "start" : "node server.js"
- }
-```
+Você também pode utilizar o **Microsoft Azure** para implantar sua API gratuitamente no plano App Service.
 
-You also have to make changes to the port, you can't hardcode a dev-port. But you can reference herokus port. So the code will have the following:
-```js
-const port = process.env.PORT || 4000;
-```
+### Pré-requisitos e Instalação
 
-## Deploy to Glitch
-
-Not tested 100%. Same as with Heroku, will sleep after a while.
-
-1. Register for [Glitch](https://glitch.com/) or go to [Glitch/edit](https://glitch.com/)
-2. Click **New Project**
-3. Click **Import from GitHub**
-4. Paste `https://github.com/jesperorb/json-server-heroku.git` into the URL-input and click OK.
-5. Wait for it to setup
-6. Press **Share**-button to get your URL to live site. It should be something for example like: `https://fallabe-pie-snake.glitch.me`. And your DB will be at `https://fallabe-pie-snake.glitch.me/posts`
-
-## Deploy to **Azure**
-
-<img align="right" width="100px" height="auto" src="https://docs.microsoft.com/en-us/azure/media/index/azure-germany.svg" alt="Azure">
-
-You can also use _Microsoft Azure_ to deploy a smaller app for free to the Azure platform. The service is not as easy as _Heroku_ and you might go insane because the documentation is really really bad at some times and it's hard to troubleshoot.
-
-The **pros** are that on _Azure_ the app **will not be forced to sleep**. It will sleep automatically on inactivity but you can just visit it and it will start up.
-
-## Installation
-
-1 . Create a Microsoft Account that you can use on Azure: </br>
-https://azure.microsoft.com/
-
-2 . Install the `azure-cli`: <br/>
-https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
-_This might cause some trouble, you will see. Remember to restart your terminal or maybe your computer if the commands after this does not work_
-
-3 . Login to the service via the command line and follow the instructions: </br>
+1. Crie uma conta na [Azure](https://azure.microsoft.com/).
+2. Instale a [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) em seu computador.
+3. Faça login no Azure pelo terminal:
 ```bash
 az login
 ```
-_You will be prompted to visit a website and paste a confirmation code_
 
 
-## Create the project
 
-1 . [Create your database](#create-your-database)
+### Criando e Implantando o Projeto
 
-2 . Create a resource group for your projects, replace the name to whatever you want just be sure to use the same group name in all commands to come. You only have to create the resource group and service plan once, then you can use the same group and plan for all other apps you create if you like.
-
+1. Crie um grupo de recursos:
 ```bash
-az group create -n NameOfResourceGroup -l northeurope
-```
-
-3 . Create a service plan:
+az group create -n MeuGrupoDeRecursos -l northeurope
 
 ```
-az appservice plan create -n NameOfServicePlan -g NameOfResourceGroup
-```
 
-4 . Create the actual app and supply the service plan and resource group
+
+2. Crie um plano de serviço:
 ```bash
-az webapp create -n NameOfApp -g NameOfResourceGroup --plan NameOfServicePlan
+az appservice plan create -n MeuPlanoDeServico -g MeuGrupoDeRecursos
 ```
 
-5 . Create deployment details. A git-repo is not created automatically so we have to create it with a command:
 
+3. Crie a Web App:
 ```bash
-az webapp deployment source config-local-git -n NameOfApp -g NameOfResourceGroup
+az webapp create -n NomeDaSuaApp -g MeuGrupoDeRecursos --plan MeuPlanoDeServico
 ```
 
-6 . From the command in step 5 you should get a **url** in return. Copy this url and add it as a remote to your local git project, for example:
 
+4. Configurar o repositório de deploy Git local:
 ```bash
-git remote add azure https://jesperorb@deploy-testing.scm.azurewebsites.net/deploy-testing.git
+az webapp deployment source config-local-git -n NomeDaSuaApp -g MeuGrupoDeRecursos
 ```
 
-7 . Now you should be able to push your app:
+
+5. Copie a URL gerada no passo anterior e adicione-a como um novo `remote` no seu repositório Git local:
+```bash
+git remote add azure <URL_RETORNADA>
+```
+
+
+6. Realize o push para o Azure:
 ```bash
 git push azure master
 ```
-
-You should be prompted to supply a password, this should be the pass to your account. If not, you can choose a different password at your Dashboard for Azure: **[https://portal.azure.com/](https://portal.azure.com/)**
-
-Choose **App Services** in the sidebar to the left and the choose your app in the list that appears then go to **Deployment Credentials** to change your password for deployment:<br>
-https://docs.microsoft.com/en-us/azure/app-service/app-service-deployment-credentials

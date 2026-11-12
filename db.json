@@ -118,7 +118,7 @@
     { "id": 4, "dayOfWeek": 4, "open": "09:00", "close": "18:00", "breakStart": "12:00", "breakEnd": "14:00", "isWorking": true },
     { "id": 5, "dayOfWeek": 5, "open": "09:00", "close": "18:00", "breakStart": "12:00", "breakEnd": "14:00", "isWorking": true },
     { "id": 6, "dayOfWeek": 6, "open": "10:00", "close": "18:00", "breakStart": "12:00", "breakEnd": "14:00", "isWorking": true },
-    { "id": 7, "dayOfWeek": 0, "open": "", "close": "", "breakStart": null, "breakEnd": null, "isWorking": false }
+    { "id": 7, "dayOfWeek": 0, "open": "-", "close": "-", "breakStart": null, "breakEnd": null, "isWorking": false }
   ],
   "blockedDates": []
 }
